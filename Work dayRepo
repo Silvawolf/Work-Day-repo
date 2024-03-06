@@ -1,0 +1,32 @@
+function getWorkdays(startDate, endDate) {
+  // Create copies of the input dates to avoid modifying the originals
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  // Calculate the difference in days
+  const timeDiff = end - start;
+  const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+  // Initialize the count of workdays
+  let workdays = 0;
+
+  // Iterate through each day in the range
+  for (let i = 0; i <= daysDiff; i++) {
+    // Check if the current day is not a weekend (Saturday or Sunday)
+    const currentDay = new Date(start);
+    currentDay.setDate(start.getDate() + i);
+
+    if (currentDay.getDay() !== 0 && currentDay.getDay() !== 6) {
+      workdays++;
+    }
+  }
+
+  return workdays;
+}
+
+// Example usage:
+const startDate = new Date('2024-03-01'); // replace with your start date
+const endDate = new Date('2024-03-15');   // replace with your end date
+
+const result = getWorkdays(startDate, endDate);
+console.log(`Number of workdays: ${result}`);
